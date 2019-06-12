@@ -1,0 +1,4 @@
+<launch>
+<arg name="path_to_config" />
+<node name="esiaf_emotion_recognition" pkg="esiaf_emotion_recognition" type="start_emotion_recognition.py" output="screen" args="$(arg path_to_config)" />
+</launch>
