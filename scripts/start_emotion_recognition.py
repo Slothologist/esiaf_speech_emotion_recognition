@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+from esiaf_emotion_recognition.emotion_rec_wrapper import Emotion_rec
 import pyesiaf
 import rospy
 from moveit_ros_planning_interface._moveit_roscpp_initializer import roscpp_init
@@ -30,12 +30,12 @@ data = yaml.safe_load(open(path_to_config))
 
 rospy.loginfo('Creating emotion recognizer instance...')
 
-#wrapper = Wrapper(nodename=nodename)
+wrapper = Emotion_rec(data)
 
 emotion_publisher = rospy.Publisher(nodename + '/' + 'EmotionInfo', EmotionInfo, queue_size=10)
 
 rospy.loginfo('Creating esiaf handler...')
-handler = pyesiaf.Esiaf_Handler('emotion_recognizer', pyesiaf.NodeDesignation.EmotionInfo, sys.argv)
+handler = pyesiaf.Esiaf_Handler('emotion_recognizer', pyesiaf.NodeDesignation.Emotion, sys.argv)
 
 rospy.loginfo('Setting up esiaf...')
 esiaf_format = pyesiaf.EsiafAudioFormat()
@@ -57,16 +57,17 @@ def input_callback(audio, timeStamps):
     msg_from_string(_recording_timestamps, timeStamps)
 
     # voice vector call
-    emotion, probability = 0, 0
+    emotion, probability = wrapper.recognize_emotion(audio), 1.0
 
     # assemble output
     output = EmotionInfo()
     output.duration = _recording_timestamps
-    output.voiceId = emotion
+    output.emotion = emotion
     output.probability = probability
 
     # publish output
     emotion_publisher.publish(output)
+    rospy.loginfo('Person is ' + emotion)
 
 
 
