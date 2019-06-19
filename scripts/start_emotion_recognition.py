@@ -3,7 +3,6 @@
 from esiaf_emotion_recognition.emotion_rec_wrapper import Emotion_rec
 import pyesiaf
 import rospy
-from moveit_ros_planning_interface._moveit_roscpp_initializer import roscpp_init
 from esiaf_ros.msg import RecordingTimeStamps, AugmentedAudio, EmotionInfo
 
 # config
@@ -17,7 +16,7 @@ nodename = 'esiaf_emotion_recognizer'
 
 # initialize rosnode
 rospy.init_node(nodename)
-roscpp_init(nodename, [])
+pyesiaf.roscpp_init(nodename, [])
 
 # read config
 rospy.loginfo('Loading config...')
