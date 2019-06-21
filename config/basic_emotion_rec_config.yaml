@@ -1,3 +1,3 @@
 esiaf_input_topic: /esiaf_ros/segmented
 model_type: LSTM
-model_save_file: $CATKIN_INSTALL_DIR/share/speechemotionrecognition/models/best_model_LSTM.h5
+model_save_file: $prefix/share/speechemotionrecognition/models/best_model_LSTM.h5
