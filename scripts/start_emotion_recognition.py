@@ -56,7 +56,7 @@ def input_callback(audio, timeStamps):
     msg_from_string(_recording_timestamps, timeStamps)
 
     # voice vector call
-    emotion, probability = wrapper.recognize_emotion(audio), 1.0
+    emotion, probability = wrapper.recognize_emotion(audio)
 
     # assemble output
     output = EmotionInfo()

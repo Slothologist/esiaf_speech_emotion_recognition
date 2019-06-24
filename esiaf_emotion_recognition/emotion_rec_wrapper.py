@@ -43,4 +43,6 @@ class Emotion_rec:
         # prepare data
         mfccs = self.get_mfccs(audio)
         # call model and return label
-        return labels[self.model.predict_one(mfccs)]
+        prediction = self.model.predict_one(mfccs)
+        best = np.argmax(prediction)
+        return labels[best], prediction[best]
