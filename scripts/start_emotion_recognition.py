@@ -31,7 +31,7 @@ rospy.loginfo('Creating emotion recognizer instance...')
 
 wrapper = Emotion_rec(data)
 
-emotion_publisher = rospy.Publisher(nodename + '/' + 'EmotionInfo', EmotionInfo, queue_size=10)
+emotion_publisher = rospy.Publisher(nodename + '/' + 'emotion', EmotionInfo, queue_size=10)
 
 rospy.loginfo('Creating esiaf handler...')
 handler = pyesiaf.Esiaf_Handler('emotion_recognizer', pyesiaf.NodeDesignation.Emotion, sys.argv)
